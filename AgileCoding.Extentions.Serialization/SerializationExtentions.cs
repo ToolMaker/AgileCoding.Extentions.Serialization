@@ -30,7 +30,12 @@
                 TypeNameHandling = typeNameHandling
             };
 
-            return JsonConvert.DeserializeObject<DeserializedType>(jsonSerializedString);
+            var deserializedObj = JsonConvert.DeserializeObject<DeserializedType>(jsonSerializedString);
+            if (deserializedObj == null)
+            {
+                throw new ArgumentNullException($"{nameof(JSONDeserialize)} extention method received a null object after deserialization. Please guve a valid object.");
+            }
+            return deserializedObj;
         }
     }
 }
